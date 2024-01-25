@@ -16,6 +16,7 @@ public class CalculadoraMasaCorporal {
     public static double calcularIndiceMasaCorporal(double estatura, double peso){
 `       estatura /= 100;
         return peso/Math.pow(estatura, 2);
+        System.out.println("Hice un cambio");
     }
     public static String clasificarIndiceMasaCorporal(Double imc){
         String value = "";
