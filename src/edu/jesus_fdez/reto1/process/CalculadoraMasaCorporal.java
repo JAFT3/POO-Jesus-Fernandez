@@ -14,12 +14,28 @@ public class CalculadoraMasaCorporal {
      * @return indice de masa corproral
      **/
     public static double calcularIndiceMasaCorporal(double estatura, double peso){
-`       estatura /= 100;
-        return peso/Math.pow(estatura, 2);
-        System.out.println("Hice un cambio");
+       estatura /= 100;
+       double imc =  peso/Math.pow(estatura, 2);
+        return imc;
     }
     public static String clasificarIndiceMasaCorporal(Double imc){
         String value = "";
-        return switch (value)
+        if (imc<18){
+            value = "Peso bajo";
+        }else if(imc<=24.99) {
+            value = "Peso normal";
+        }
+        else if (imc <= 29.99) {
+            value = "Sobrepeso";
+        }
+        else if (imc <= 34.99) {
+            value = "Obesidad leve";
+        }
+        else if (imc <= 39.99) {
+            value = "Obesidad media";
+        }else {
+            value = "Obesidad morbida";
+        }
+        return value;
     }
 }
