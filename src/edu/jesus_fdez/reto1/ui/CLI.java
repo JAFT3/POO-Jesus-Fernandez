@@ -5,6 +5,7 @@ import edu.jesus_fdez.reto1.process.CalculadoraMasaCorporal;
 import java.util.Scanner;
 
 import static edu.jesus_fdez.reto1.process.CalculadoraMasaCorporal.calcularIndiceMasaCorporal;
+import static edu.jesus_fdez.reto1.process.CalculadoraMasaCorporal.clasificarIndiceMasaCorporal;
 
 public class CLI {
     public static double estatura;
@@ -37,6 +38,7 @@ public class CLI {
                 double resultado = CalculadoraMasaCorporal.calcularIndiceMasaCorporal(estatura, peso);
                 System.out.println(resultado);
                 CalculadoraMasaCorporal.clasificarIndiceMasaCorporal(imc);
+                System.out.println(clasificarIndiceMasaCorporal());
 
                 break;
             case 'b':
