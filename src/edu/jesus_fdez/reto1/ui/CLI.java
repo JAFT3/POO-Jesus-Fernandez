@@ -2,14 +2,12 @@ package edu.jesus_fdez.reto1.ui;
 
 import edu.jesus_fdez.reto1.process.CalculadoraMasaCorporal;
 
+import java.security.spec.RSAOtherPrimeInfo;
 import java.util.Scanner;
-
-import static edu.jesus_fdez.reto1.process.CalculadoraMasaCorporal.calcularIndiceMasaCorporal;
-import static edu.jesus_fdez.reto1.process.CalculadoraMasaCorporal.clasificarIndiceMasaCorporal;
 
 public class CLI {
     public static double estatura;
-    public static int peso;
+    public static double peso;
     public static double imc;
 
     public static void showMenu(){
@@ -37,9 +35,8 @@ public class CLI {
                 System.out.println("Excelente eleccion, a continuacion te proporcionaremos tus datos!");
                 double resultado = CalculadoraMasaCorporal.calcularIndiceMasaCorporal(estatura, peso);
                 System.out.println(resultado);
-                CalculadoraMasaCorporal.clasificarIndiceMasaCorporal(imc);
-                System.out.println(clasificarIndiceMasaCorporal());
-
+                String clasificacion = CalculadoraMasaCorporal.clasificarIndiceMasaCorporal(resultado);
+                System.out.println(clasificacion);
                 break;
             case 'b':
                 System.out.println("Tu opcion es b");

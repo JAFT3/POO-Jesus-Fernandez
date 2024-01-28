@@ -1,4 +1,5 @@
 package edu.jesus_fdez.reto1.process;
+
 /**
  * Esta clase sirve para realizar calculos
  * de masa corporal incluye los metodos:
@@ -6,6 +7,8 @@ package edu.jesus_fdez.reto1.process;
  * masa corporal madre
  * **/
 public class CalculadoraMasaCorporal {
+
+
     /**
      * Este metodo sirve para calcular el Indice de Masa Corproal de una persona
      * mediante la estatura y el peso
@@ -15,12 +18,11 @@ public class CalculadoraMasaCorporal {
      **/
     public static double calcularIndiceMasaCorporal(double estatura, double peso){
        estatura /= 100;
-       double imc =  peso/Math.pow(estatura, 2);
-        return imc;
+        return peso/Math.pow(estatura, 2);
     }
-    public static String clasificarIndiceMasaCorporal(Double imc){
+    public static String clasificarIndiceMasaCorporal(double imc){
         String value = "";
-        if (imc<18){
+        if (imc<=18){
             value = "Peso bajo";
         }else if(imc<=24.99) {
             value = "Peso normal";
