@@ -21,6 +21,8 @@ public class CalculadoraMasaCorporal {
         return peso/Math.pow(estatura, 2);
     }
     public static String clasificarIndiceMasaCorporal(double imc){
+        /** En este metodo, mediante el imc que nos da el metodo anterior lo clasificamos dentro
+        * de las distintos rangos correspondientes. **/
         String value = "";
         if (imc<=18){
             value = "Peso bajo";
@@ -39,5 +41,32 @@ public class CalculadoraMasaCorporal {
             value = "Obesidad morbida";
         }
         return value;
+    }
+    public static double calcularMasaCorporalMagra(double estatura, double peso, String sexo){
+        /** Este metodo nos ayudara a obtener la cantidad de Masa Corporal Magra
+         * mediante el sexo, estatura y peso.
+         * @param sexo se solicita como la inicial del genero (M o F)**/
+        if (sexo.equals("M")){
+            return (1.10 * peso) - 128 * (Math.pow(peso, 2) / Math.pow(estatura, 2));
+        }else if (sexo.equals("F")){
+            return (1.07 * peso) - 148 * (Math.pow(peso, 2) / Math.pow(estatura, 2));
+        }
+        else{
+            System.out.println("Valor no reconocido.");
+        }
+        return 0;
+    }
+    public static double calcularMetabolismoBasal(double estatura, double peso, String sexo, int edad){
+        /**En este metodo utilizaremos una nueva variable que sera la edad del usuario
+         * para poder calcular el gasto energetico mediante la formula de Harris-Beredict**/
+        if (sexo.equals("M")){
+            return  66.5 + (13.75 * peso) + (5.003 * estatura) - (6.775 * edad);
+        }else if (sexo.equals("F")){
+            return 655.1 + (9.563 * peso) + (1.85 * estatura) - (4.676 * edad);
+        }
+        else{
+            System.out.println("Valor no reconocido.");
+        }
+        return 0;
     }
 }
