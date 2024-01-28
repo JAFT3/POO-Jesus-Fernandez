@@ -25,15 +25,15 @@ public class CLI {
         showMenu();
 
         char opcion = scanner.next().charAt(0);
-        System.out.println("Para realizar cualquier operacion, necesitaremos los siguientes datos base.");
-        System.out.print("Ingresa tu estatura en centimetros: ");
-        estatura = scanner.nextDouble();
-        System.out.print("Ingresa tu peso en kilogramos: ");
-        peso = scanner.nextInt();
 
         switch (opcion){
             case 'a':
                 System.out.println("Excelente eleccion, a continuacion te proporcionaremos tus datos!");
+                System.out.println("Para realizar la operacion, necesitaremos los siguientes datos base.");
+                System.out.print("Ingresa tu estatura en centimetros: ");
+                estatura = scanner.nextDouble();
+                System.out.print("Ingresa tu peso en kilogramos: ");
+                peso = scanner.nextInt();
                 double resultado = CalculadoraMasaCorporal.calcularIndiceMasaCorporal(estatura, peso);
                 System.out.println("Tu IMC es: "+ resultado);
                 String clasificacion = CalculadoraMasaCorporal.clasificarIndiceMasaCorporal(resultado);
@@ -41,6 +41,11 @@ public class CLI {
                 break;
             case 'b':
                 System.out.println("Excelente eleccion, en esta ocasion ocuparemos que proporciones los siguiente datos: ");
+                System.out.println("Para realizar la operacion, necesitaremos los siguientes datos base.");
+                System.out.print("Ingresa tu estatura en centimetros: ");
+                estatura = scanner.nextDouble();
+                System.out.print("Ingresa tu peso en kilogramos: ");
+                peso = scanner.nextInt();
                 System.out.println("Ingresa tu sexo: (M - Masculino , F - Femenino)");
                 sexo = scanner.next().toUpperCase();
                 short resultado2 = (short) CalculadoraMasaCorporal.calcularMasaCorporalMagra(estatura, peso, sexo);
@@ -48,6 +53,11 @@ public class CLI {
                 break;
             case 'c':
                 System.out.println("Excelente eleccion, en esta ocasion ocuparemos que proporciones los siguiente datos: ");
+                System.out.println("Para realizar cualquier operacion, necesitaremos los siguientes datos base.");
+                System.out.print("Ingresa tu estatura en centimetros: ");
+                estatura = scanner.nextDouble();
+                System.out.print("Ingresa tu peso en kilogramos: ");
+                peso = scanner.nextInt();
                 System.out.println("Ingresa tu sexo: (M - Masculino , F - Femenino)");
                 sexo = scanner.next().toUpperCase();
                 System.out.println("Ingresa tu edad: ");
