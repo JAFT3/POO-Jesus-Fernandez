@@ -1,6 +1,7 @@
 package edu.jesus_fdez.reto4.ui;
 
 import edu.jesus_fdez.reto2.venta_cajas.process.CalculadorCompraVenta;
+import edu.jesus_fdez.reto4.process.VendedorBoletos;
 
 import java.util.Scanner;
 
@@ -21,9 +22,11 @@ public class CLI {
             opcion = scanner.next().charAt(0);
             switch (opcion) {
                 case 'a':
+                    VendedorBoletos.realizarVenta();
                     break;
 
                 case 'b':
+                    VendedorBoletos.mostrarListaPasajeros();
                     break;
 
                 default:
