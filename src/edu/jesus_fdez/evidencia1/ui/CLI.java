@@ -24,6 +24,7 @@ public class CLI {
             nombreQuimico = scanner.nextLine();
 
             if (nombreQuimico.equalsIgnoreCase("salir")) {
+<<<<<<< HEAD
                 CalculadorMedicamento.generarReporte(medicamentos);
                 break; // Sale del bucle si el usuario decide salir.
             } else {
@@ -31,17 +32,36 @@ public class CLI {
                  * Resto del código para ingresar datos del medicamento
                  */
 
+=======
+                System.out.println("Has salido con éxito.");
+                break; // Sale del bucle si el usuario decide salir.
+
+            } else {
+                // Resto del código para ingresar datos del medicamento
+>>>>>>> evidencia1
                 System.out.println("Ingrese el nombre genérico:");
                 nombreGenerico = scanner.nextLine();
 
                 System.out.println("Ingrese el nombre registrado:");
                 nombreRegistrado = scanner.nextLine();
 
+<<<<<<< HEAD
                 while (true) {
                     System.out.println("Ingrese el precio al público:");
+
                     try {
                         precioPublico = Double.parseDouble(scanner.nextLine());
                         break;
+=======
+
+                while (true) {
+                    System.out.println("Ingrese el precio al público:");
+
+                    try {
+                        precioPublico = Double.parseDouble(scanner.nextLine());
+                        break;
+
+>>>>>>> evidencia1
                     } catch (NumberFormatException e) {
                         System.out.println("Error: Ingrese un valor numérico válido.");
                     }
@@ -50,6 +70,7 @@ public class CLI {
                 System.out.println("Ingrese el tipo de presentación (solido/semisolido/liquido):");
                 formaFarmaceutica = scanner.nextLine();
 
+<<<<<<< HEAD
                 /**
                  * Resto del código para manejar la información del medicamento.
                  */
@@ -61,3 +82,14 @@ public class CLI {
         }
     }
 }
+=======
+                // Resto del código para manejar la información del medicamento.
+            }
+        }
+            //ingresa las variables al ArrayList
+        Medicamento medicamento = new Medicamento(nombreQuimico, nombreGenerico, nombreRegistrado, formaFarmaceutica, precioPublico);
+        medicamentos.add(medicamento);
+
+        }
+    }
+>>>>>>> evidencia1
