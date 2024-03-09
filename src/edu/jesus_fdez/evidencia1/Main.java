@@ -1,7 +1,13 @@
 package edu.jesus_fdez.evidencia1;
 
+<<<<<<< HEAD
+import edu.jesus_fdez.evidencia1.ui.CLI;
+
+import edu.jesus_fdez.evidencia1.data.Medicamento;
+=======
 import edu.jesus_fdez.evidencia1.data.Medicamento;
 import edu.jesus_fdez.evidencia1.ui.CLI;
+>>>>>>> evidencia1
 
 import java.util.ArrayList;
 
@@ -13,3 +19,6 @@ public class Main {
         System.out.println(medicamentos);
     }
 }
+=======
+}
+>>>>>>> evidencia1

@@ -1,5 +1,9 @@
 package edu.jesus_fdez.evidencia1.data;
 
+<<<<<<< HEAD
+import java.util.ArrayList;
+=======
+>>>>>>> evidencia1
 import edu.jesus_fdez.evidencia1.process.CalculadorMedicamento;
 
 public class Medicamento {
@@ -29,3 +33,8 @@ public class Medicamento {
                             tipoPresentacion, precioPublico, precioVenta);
     }
 }
+=======
+                            tipoPresentacion, precioPublico, precioVenta);
+    }
+}
+>>>>>>> evidencia1
