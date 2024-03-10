@@ -6,6 +6,9 @@ import edu.jesus_fdez.reto6.data.Empleado;
 import java.util.ArrayList;
 
 public class CalculadorSueldos {
+    /**
+     * Metodo para generar el total de los sueldos
+     * **/
     public static void calcularSueldo(ArrayList<Empleado> empleados, int cantEmpleados){
         double totalNomina = 0;
         double totalSueldoNormal = 0;
