@@ -1,6 +1,9 @@
 package edu.jesus_fdez.reto7.ui;
 
 public class ESP extends Idiomas{
+    /**
+     * Constructor para declarar al idioma español
+     */
     public ESP() {
 
         MENU = "---Calculadora---" +

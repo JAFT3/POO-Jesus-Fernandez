@@ -9,7 +9,8 @@ public class CLI {
     private static double numero1;
     private static double numero2;
 
-    private static Idiomas idiomas = new ESP();
+    //Se declara con el idioma ingles como predeterminado
+    private static Idiomas idiomas = new ENG();
 
     public static void showMenu() {
         System.out.println("---Calculator---");

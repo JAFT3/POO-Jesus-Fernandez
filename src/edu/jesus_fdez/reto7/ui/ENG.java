@@ -1,6 +1,9 @@
 package edu.jesus_fdez.reto7.ui;
 
 public class ENG extends Idiomas{
+    /**
+     * Constructor para declarar al idioma ingles
+     */
     public ENG(){
         MENU = "---Calculator---" + "\nChoose an option: \nA. Addition\nB. Subtraction\nC. Multiplication\nD. Division" +
                 "\nE. Modulus\nF. Exponentiation\nG. Logarithm" + "\nEnter the desired option:";

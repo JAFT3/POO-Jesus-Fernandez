@@ -1,4 +1,9 @@
 package edu.jesus_fdez.reto7.ui;
+/**
+ * Esta clase es para la creacion de las varibles que
+ * contendran la traducción de ambos idiomas
+ */
+
 
 public class Idiomas {
     public String MENU;
