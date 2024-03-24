@@ -11,4 +11,5 @@ public class Idiomas {
     public String RESULTADO_UNO;
     public String RESULTADO_DOS;
     public String OPCION_INVALIDA;
+
 }

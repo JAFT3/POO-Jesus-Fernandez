@@ -97,8 +97,8 @@ public class CLI {
         }
 
     }
-    public static void imprimirResultado(Operacion operacion, double numero1, double numero2){
+    public static void imprimirResultado(Operacion operacion, double numero1, double numero2) {
         System.out.println(idiomas.RESULTADO_UNO + operacion.getClass().getSimpleName() + idiomas.RESULTADO_DOS
-                + operacion.calcular(numero1,numero2));
+                + operacion.calcular(numero1, numero2));
     }
 }

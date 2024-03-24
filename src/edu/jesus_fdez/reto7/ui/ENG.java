@@ -14,5 +14,6 @@ public class ENG extends Idiomas{
         OPCION_INVALIDA = "Invalid option";
         RESULTADO_UNO = "The result of ";
         RESULTADO_DOS = " is: ";
+
     }
 }
