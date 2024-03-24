@@ -1,6 +1,6 @@
 package edu.jesus_fdez.reto7.process;
 
-public class Potencia extends Operacion{
+public class Potencia extends Multiplicacion{
     public double calcular(double numero1, double numero2){
         double resultado = 0;
         for (int i = 0; i < numero2; i++){
