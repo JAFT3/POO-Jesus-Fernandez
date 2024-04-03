@@ -23,6 +23,9 @@ public class Empleado {
         this.numeroTelefonico = numeroTelefonico;
     }
 
+    public Empleado(String nombre, int horasTrabajadas, int horasExtras, Categoria categoria) {
+    }
+
     /*Metodo para mostrar los datos del usuario*/
     @Override
     public String toString() {

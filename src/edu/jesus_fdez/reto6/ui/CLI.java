@@ -22,8 +22,6 @@ public class CLI {
             System.out.println("\nEmpleado #" + (i + 1));
             System.out.print("Nombre completo: ");
             String nombre = sc.nextLine();
-            System.out.print("Numero Telefonico: ");
-            int horasTrabajadas = sc.nextInt();
             System.out.print("Horas trabajadas: ");
             int horasTrabajadas = sc.nextInt();
             System.out.print("Horas extras trabajadas: ");

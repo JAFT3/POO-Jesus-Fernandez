@@ -1,9 +1,5 @@
 package edu.jesus_fdez.evidencia1.data;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
->>>>>>> evidencia1
 import edu.jesus_fdez.evidencia1.process.CalculadorMedicamento;
 
 public class Medicamento {
@@ -23,6 +19,7 @@ public class Medicamento {
         this.tipoPresentacion = tipoPresentacion;
         this.precioVenta = CalculadorMedicamento.calcularPrecio(precioPublico, tipoPresentacion);
     }
+
     public String toString() {
         return String.format("Nombre Químico: %s \n" +
                         "Nombre Genérico: %s \n" +
@@ -30,11 +27,6 @@ public class Medicamento {
                         "Forma Farmacéutica: %s \n" +
                         "Precio Público: %.2f \n" +
                         "Precio Venta: %.2f ", nombreQuimico, nombreGenerico, nombreRegistrado,
-                            tipoPresentacion, precioPublico, precioVenta);
+                tipoPresentacion, precioPublico, precioVenta);
     }
 }
-=======
-                            tipoPresentacion, precioPublico, precioVenta);
-    }
-}
->>>>>>> evidencia1
