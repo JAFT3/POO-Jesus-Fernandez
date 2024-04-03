@@ -3,7 +3,7 @@ package edu.jesus_fdez.evidencia2.ui;
 public class Idiomas {
     public String ERROR_INESPERADO;
 
-    public String INICIO_SECION;
+    public String INICIO_SESION;
     public String USUARIO;
     public String CONTRASENA;
     public String DATOS_INCORRECTOS;
