@@ -2,7 +2,7 @@ package edu.jesus_fdez.evidencia2.data;
 
 public class Videojuego extends Producto {
     public Videojuego(String nombre, String tipo, double precioBase, boolean estreno) {
-        super(nombre, "Videojuego", 5, estreno);
+        super(nombre, "Videojuego", 5,"", estreno);
     }
 
     @Override

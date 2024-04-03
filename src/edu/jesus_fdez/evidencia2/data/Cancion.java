@@ -1,17 +1,20 @@
 package edu.jesus_fdez.evidencia2.data;
 
-public class Cancion extends Producto{
+public class Cancion extends Producto {
+    // Constructor de la clase Cancion
     public Cancion(String nombre, String tipo, double precioBase, boolean estreno) {
-        super(nombre, "Cancion", 5, estreno);
+        super(nombre, tipo, precioBase, "", estreno); // Llama al constructor de la clase base Producto
     }
 
+    // Método para calcular el precio de la canción
     @Override
     public double calcularPrecio() {
-        if(estreno){
-            precioTotal += 1.5;
-        }else {
-            precioTotal += 0.5;
+        // Calcula el precio total de la canción
+        if (estreno) {
+            precioTotal = precioBase + 1.5; // Suma 1.5 al precio base si es un estreno
+        } else {
+            precioTotal = precioBase + 0.5; // Suma 0.5 al precio base si no es un estreno
         }
-        return precioTotal;
+        return precioTotal; // Devuelve el precio total calculado
     }
 }

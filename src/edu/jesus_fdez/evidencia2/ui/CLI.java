@@ -33,8 +33,8 @@ public class CLI {
         }
         System.out.println();
         System.out.println(idiomas.INICIO_SESION);
-        String usuarioCorrecto = "Admin";
-        String contrasenaCorrecta = "Admin";
+        String usuarioCorrecto = "admin";
+        String contrasenaCorrecta = "admin";
         boolean credencialesCorrectas = false;
 
         while (!credencialesCorrectas) {
@@ -55,7 +55,7 @@ public class CLI {
         System.out.println(idiomas.INICIO_EXITOSO);
 
         List<Producto> productosConsumidos = CalculadoraCostos.generadorAleatorio();
-        double precioTotal = CalculadoraCostos.calcuclarPrecioTotal(productosConsumidos);
+        double precioTotal = CalculadoraCostos.calcularPrecioTotal(productosConsumidos);
 
         System.out.println();
         System.out.println(idiomas.SALDO_PAGAR + precioTotal);
