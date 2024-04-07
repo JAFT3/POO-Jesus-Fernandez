@@ -1,11 +1,14 @@
 package edu.jesus_fdez.reto9.ui;
 
+import edu.jesus_fdez.reto9.process.ContadorDePalabras;
+
 import java.util.Scanner;
 
 public class CLI {
-    public static Idiomas idiomas = new ESP();
+    public static Idiomas idiomas = new ESP(); // Idioma por defecto al iniciar la aplicación
 
     public static void showMenu() {
+        // Mostrar el menú para que el usuario elija el idioma
         System.out.println("------------------Idioma------------------" +
                 "\nDigite el idioma (Type the language)" +
                 "\n1- Español (ESP)" +
@@ -18,6 +21,7 @@ public class CLI {
         showMenu();
         String idioma = sc.next();
 
+        // Establecer el idioma seleccionado
         switch (idioma.toUpperCase()) {
             case "ESP":
                 idiomas = new ESP();
@@ -26,9 +30,11 @@ public class CLI {
                 idiomas = new ENG();
                 break;
         }
+
         System.out.println(idiomas.MENU);
-        System.out.println("Seleccione el libro deseado (Select the desired book):");
-        String libroSeleccionado = sc.next(); // Cambiado a next() para evitar el salto de línea no deseado
+        String libroSeleccionado = sc.next();
+
+        // Mostrar el nombre del libro seleccionado en el idioma seleccionado
         switch (libroSeleccionado) {
             case "1":
                 System.out.println(Idiomas.LIBRO_SELECCIONADO + Idiomas.LIBRO1);
@@ -51,7 +57,9 @@ public class CLI {
                 System.out.println(Idiomas.LISTA_PALABRAS);
                 break;
             default:
-                System.out.println(Idiomas.ERROR_LIBRO);
+                System.out.println(Idiomas.ERROR_LIBRO); // Mostrar mensaje de error si el libro seleccionado no es válido
         }
+
+        ContadorDePalabras.setLibrosDisponibles(libroSeleccionado); // Llamar al método para contar las palabras del libro seleccionado
     }
 }
