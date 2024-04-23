@@ -52,4 +52,18 @@ public class ContadorDePalabras {
         listaOrdenada.sort((a, b) -> b.getValue().compareTo(a.getValue())); /**Ordenar por frecuencia descendente**/
         return listaOrdenada;
     }
+    public static void contarVocales(List<String> palabras){
+        /**Metodo para contar vocales con lambda**/
+        long totalVocales = palabras.stream()
+                .flatMapToInt(CharSequence::chars)
+                .mapToObj(c ->(char) c)
+                .filter(c ->"aeiouAEIOU".indexOf(c)!=-1)
+                .count();
+        System.out.println(Idiomas.TOTAL_VOCALES + totalVocales);
+    }
+    public static void situacionVocales(List<String> palabras){
+        boolean situacion = palabras.stream()
+                .anyMatch(p->p.matches("^[aeiouAEIOU].*[aeiouAEIOU]$")&& p.length()>=5);
+        System.out.println(Idiomas.SITUACION_VOCALES+situacion);
+    }
 }
