@@ -66,4 +66,12 @@ public class ContadorDePalabras {
                 .anyMatch(p->p.matches("^[aeiouAEIOU].*[aeiouAEIOU]$")&& p.length()>=5);
         System.out.println(Idiomas.SITUACION_VOCALES+situacion);
     }
+    public static void imprimirPalabrasVocales(List<String> palabras){
+        palabras.stream()
+                .filter(p->p.length() > 0 && "aeiouAEIOU".indexOf(p.charAt(0))!=-1)
+                .sorted()
+                .distinct()
+                .forEach(System.out::println);
+    }
+
 }
