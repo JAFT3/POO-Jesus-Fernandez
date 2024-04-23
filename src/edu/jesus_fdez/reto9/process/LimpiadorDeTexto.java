@@ -7,18 +7,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LimpiadorDeTexto {
-    // Método para obtener las palabras de un archivo de texto limpias de caracteres no alfabéticos
+    /** Método para obtener las palabras de un archivo de texto limpias de caracteres no alfabéticos**/
     public static List<String> obtenerPalabras(String filePath){
         List<String> palabras = new ArrayList<>();
-        try {
-            Scanner sc = new Scanner(new File(filePath)); // Crear un Scanner para leer el archivo
-            while (sc.hasNext()){ // Mientras haya una próxima palabra en el archivo
-                String palabra = sc.next().toLowerCase().replaceAll("[^a-zA-ZñÑ´¨]", ""); // Leer y limpiar la palabra
-                palabras.add(palabra); // Agregar la palabra al listado
+        try(Scanner sc = new Scanner(new File(filePath));) {
+            while (sc.hasNext()){ /** Mientras haya una próxima palabra en el archivo**/
+                String palabra = sc.next().toLowerCase().replaceAll("[^a-zA-ZñÑ´¨]", ""); /** Leer y limpiar la palabra**/
+                palabras.add(palabra); /**Agregar la palabra al listado**/
             }
-        } catch (FileNotFoundException e) { // Capturar la excepción en caso de que el archivo no sea encontrado
-            e.printStackTrace(); // Imprimir la traza de la excepción para depuración
+        } catch (FileNotFoundException e) { /**Capturar la excepción en caso de que el archivo no sea encontrado**/
+            e.printStackTrace(); /**Imprimir la traza de la excepción para depuración**/
         }
-        return palabras; // Devolver la lista de palabras limpias
+        return palabras; /**Devolver la lista de palabras limpias**/
     }
 }
