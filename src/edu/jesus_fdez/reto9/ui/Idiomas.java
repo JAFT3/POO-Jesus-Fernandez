@@ -12,5 +12,12 @@ public class Idiomas {
     public static String LIBRO5;
     public static String ERROR_LIBRO;
     public static String ERROR;
+    public static String TOTAL_VOCALES;
+    public static String SITUACION_VOCALES;
+    public static String PALABRAS_VOCAL;
+    public static String PALABRAS_IMPAR;
+    public static String PALABRA_LARGA;
+    public static String PALABRA_CORTA;
+    public static String CRITERIO_ERROR;
 
 }

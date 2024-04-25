@@ -60,6 +60,6 @@ public class CLI {
                 System.out.println(Idiomas.ERROR_LIBRO); // Mostrar mensaje de error si el libro seleccionado no es válido
         }
 
-        ContadorDePalabras.setLibrosDisponibles(libroSeleccionado); // Llamar al método para contar las palabras del libro seleccionado
+        ContadorDePalabras.setLibrosDisponibles(libroSeleccionado);// Llamar al método para contar las palabras del libro seleccionado
     }
 }
