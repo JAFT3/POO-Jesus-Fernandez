@@ -3,7 +3,13 @@ package edu.jesus_fdez.reto9.process;
 import edu.jesus_fdez.reto9.ui.Idiomas;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ContadorDePalabras {
     private static final HashMap<String, String> librosDisponibles = new HashMap<>(); /** HashMap que almacena los libros disponibles**/
@@ -28,6 +34,22 @@ public class ContadorDePalabras {
         imprimirPalabras(listaOrdenada, palabras); // Se pasa la lista de palabras como argumento
 
     }
+    public static List<String> obtenerPalabras(String rutaArchivo) {
+        List<String> palabras = new ArrayList<>();
+
+        try {
+            // Leer todas las líneas del archivo y recopilarlas en una lista de palabras
+            palabras = Files.lines(Paths.get(rutaArchivo), StandardCharsets.UTF_8)
+                    .flatMap(linea -> Stream.of(linea.split("\\s+")))
+                    .map(String::trim)
+                    .filter(palabra -> !palabra.isEmpty())
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+
+        return palabras;
+    }
 
     /** Método para contar la frecuencia de las palabras**/
     public static @NotNull Map<String, Integer> contarPalabras(List<String> palabras){
@@ -44,7 +66,7 @@ public class ContadorDePalabras {
         listaOrdenada.sort((a, b) -> b.getValue().compareTo(a.getValue())); /**Ordenar por frecuencia descendente**/
         return listaOrdenada;
     }
-    public static void contarVocales(@NotNull List<String> palabras){
+    public static long contarVocales(@NotNull List<String> palabras){
         /**Metodo para contar vocales con lambda**/
         long totalVocales = palabras.stream()
                 .flatMapToInt(CharSequence::chars)
@@ -52,13 +74,22 @@ public class ContadorDePalabras {
                 .filter(c ->"aeiouAEIOU".indexOf(c)!=-1)
                 .count();
         System.out.println(Idiomas.TOTAL_VOCALES + totalVocales);
+        return totalVocales;
     }
-    public static void situacionVocales(@NotNull List<String> palabras){
-        palabras.stream()
+    public static boolean situacionVocales(@NotNull List<String> palabras){
+        Optional<String> palabraCumpleCondicion = palabras.stream()
                 .filter(p -> p.matches("^[aeiouAEIOU].*[aeiouAEIOU]$") && p.length() >= 5)
-                .findFirst() /** Encuentra la primera palabra que cumple la condición **/
-                .ifPresent(palabra -> System.out.println(Idiomas.SITUACION_VOCALES + "true. Palabra: " + palabra));
+                .findFirst(); /** Encuentra la primera palabra que cumple la condición **/
+
+        if (palabraCumpleCondicion.isPresent()) {
+            String palabra = palabraCumpleCondicion.get();
+            System.out.println(Idiomas.SITUACION_VOCALES + "true. Palabra: " + palabra);
+            return true;
+        } else {
+            return false;
+        }
     }
+
 
     public static void imprimirPalabrasVocales(@NotNull List<String> palabras){
         palabras.stream()
@@ -74,16 +105,18 @@ public class ContadorDePalabras {
                 .distinct()
                 .forEach(System.out::println);
     }
-    public static void palabraMasLarga(@NotNull List<String> palabras){
+    public static String palabraMasLarga(List<String> palabras){
         Optional<String> palabraMasLarga = palabras.stream()
                 .max(Comparator.comparing(String::length));
         palabraMasLarga.ifPresent(System.out::println);
+        return palabraMasLarga.orElse(null);
     }
-    public static void palabraMasCorta(@NotNull List<String> palabras){
+    public static String palabraMasCorta(@NotNull List<String> palabras){
         Optional<String> palabraMasCorta = palabras.stream()
                 .filter(p -> p.length() > 1) /** Filtrar palabras con más de un carácter **/
                 .min(Comparator.comparing(String::length));
         palabraMasCorta.ifPresent(System.out::println);
+        return palabraMasCorta.orElse(null);
     }
 
     public static void imprimirPalabras(List<Map.Entry<String, Integer>> listaOrdenada, List<String> palabras){
