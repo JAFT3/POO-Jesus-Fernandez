@@ -33,7 +33,7 @@ public class Tablero {
         System.out.println(" ╚═══╩═══╩═══╝");
     }
 
-    public void jugarTablero(){
+    public void colocarSimbolo(int fila, int columna, String simbolo){
 
     }
 }

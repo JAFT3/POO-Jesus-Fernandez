@@ -1,5 +1,7 @@
 package edu.jesus_fdez.evidencia3.ui;
 
+import edu.jesus_fdez.evidencia3.data.Jugador;
+import edu.jesus_fdez.evidencia3.data.Simbolos;
 import edu.jesus_fdez.evidencia3.process.VerificadorDeDatos;
 import edu.jesus_fdez.evidencia3.process.Tablero;
 
@@ -11,6 +13,7 @@ public class CLI {
 
     public static void showMenuIdiomas() {
         System.out.println(idiomas.MENU_IDIOMA);
+
     }
 
     public static void launchApp() {
@@ -46,6 +49,7 @@ public class CLI {
             switch (gamemode) {
                 case "1":
                     // Jugador vs Jugador
+
                     System.out.println(Idiomas.NOMBRE1);
                     String nombre1 = sc.next();
                     System.out.println(Idiomas.SIMBOLO);
@@ -60,7 +64,6 @@ public class CLI {
                             if (simboloSeleccionado != null) {
                                 System.out.println(Idiomas.SIMBOLO_FAV + simboloSeleccionado);
                                 simboloValido = true;
-
                             } else {
                                 System.out.println(Idiomas.ERROR_SIMBOLO);
                             }
@@ -69,6 +72,9 @@ public class CLI {
                             sc.next();
                         }
                     } while (!simboloValido);
+
+                    // Crear instancia del Jugador 1 con el símbolo seleccionado
+                    Jugador jugador1 = new Jugador(nombre1, VerificadorDeDatos.obtenerSimbolo(simbolo1));
 
                     //JUGADOR 2
                     System.out.println(Idiomas.NOMBRE2);
@@ -84,7 +90,8 @@ public class CLI {
                             sc.next();
                         }
                     } while (!VerificadorDeDatos.validarNombres(nombre1, nombre2));
-
+                    // Crear instancia del Jugador 1 con el símbolo seleccionado
+                    Jugador jugador2 = new Jugador(nombre1, VerificadorDeDatos.obtenerSimbolo(simbolo1));
                     do {
                         try {
                             simboloValido = VerificadorDeDatos.seleccionarSimbolo(sc, simbolo1);
@@ -93,10 +100,13 @@ public class CLI {
                             System.out.println(Idiomas.ERROR_GAMEMODE);
                             sc.next(); // Limpiar el búfer de entrada
                         }
+
                     } while (!simboloValido);
                     Tablero tablero = new Tablero();
                     tablero.mostrarTablero();
                     modoValido = true;
+                    String simboloJugador1 = jugador1.getSimbolo();
+                    String simboloJugador2 = jugador2.getSimbolo();
                     break;
 
                 case "2":
@@ -140,6 +150,7 @@ public class CLI {
                     System.out.println(Idiomas.ERROR_GAMEMODE);
                     break;
             }
+
         } while (!modoValido);
     }
 }

@@ -44,4 +44,7 @@ public class Simbolos {
         listaSimbolos.remove("\uD83E\uDD16");
         listaSimbolos.stream().sorted();
     }
+    public List<String> getListaSimbolos(){
+        return listaSimbolos;
+    }
 }
