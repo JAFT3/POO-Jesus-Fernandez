@@ -8,8 +8,11 @@ public class ESP extends Idiomas{
         ERROR_IDIOMA = "Idioma no disponible, intentelo de nuevo.";
         ERROR_GAMEMODE = "Opcion NO disponible.";
         NOMBRE1 = "Ingrese el nombre del primer jugador: ";
-        SIMBOLO1 = "Estos son los simbolos disponibles seleccione su favorito: ";
+        SIMBOLO = "Estos son los simbolos disponibles seleccione su favorito: ";
         NOMBRE2 = "Ingrese el nombre del segundo jugador: ";
-
+        ELEGIR_SIMBOLO = "Elegir un simbolo: ";
+        ERROR_SIMBOLO = "Simbolo no disponible, eliga uno de la lista.";
+        SIMBOLO_FAV = "Este es tu simbolo favorito: ";
+        ERROR_NOMBRES_IGUALES = "Los nombres no pueden ser iguales intentelo de nuevo: ";
     }
 }

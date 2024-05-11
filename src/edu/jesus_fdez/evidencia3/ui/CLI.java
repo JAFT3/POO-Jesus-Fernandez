@@ -1,6 +1,8 @@
 package edu.jesus_fdez.evidencia3.ui;
-import edu.jesus_fdez.evidencia3.process.ComprobadorSimbolos;
+
+import edu.jesus_fdez.evidencia3.process.VerificadorDeDatos;
 import edu.jesus_fdez.evidencia3.process.Tablero;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -39,74 +41,88 @@ public class CLI {
 
         boolean modoValido = false;
         do {
-            System.out.println(idiomas.MENU);
+            System.out.println(Idiomas.MENU);
             String gamemode = sc.next();
             switch (gamemode) {
                 case "1":
                     // Jugador vs Jugador
-                    System.out.println(idiomas.NOMBRE1);
+                    System.out.println(Idiomas.NOMBRE1);
                     String nombre1 = sc.next();
-                    System.out.println("Tu nombre es: " + nombre1);
-                    System.out.println(idiomas.SIMBOLO1);
-                    System.out.println(ComprobadorSimbolos.imprimirSimbolos());
+                    System.out.println(Idiomas.SIMBOLO);
+                    System.out.println(VerificadorDeDatos.imprimirSimbolos());
                     int simbolo1 = 0;
                     boolean simboloValido = false;
                     do {
                         try {
-                            System.out.print("Elige un símbolo: ");
+                            System.out.print(Idiomas.ELEGIR_SIMBOLO);
                             simbolo1 = sc.nextInt();
-                            String simboloSeleccionado = ComprobadorSimbolos.obtenerSimbolo(simbolo1);
+                            String simboloSeleccionado = VerificadorDeDatos.obtenerSimbolo(simbolo1);
                             if (simboloSeleccionado != null) {
-                                System.out.println("Tu símbolo favorito es: " + simboloSeleccionado);
+                                System.out.println(Idiomas.SIMBOLO_FAV + simboloSeleccionado);
                                 simboloValido = true;
                             } else {
-                                System.out.println("El símbolo ingresado no está disponible. Por favor, elige uno de la lista.");
+                                System.out.println(Idiomas.ERROR_SIMBOLO);
                             }
-                            /**if (ComprobadorSimbolos.esSimboloDisponible(String.valueOf(simbolo1))) {
-                             simboloValido = true;
-                             } else {
-                             System.out.println("El símbolo ingresado no está disponible. Por favor, elige uno de la lista.");
-                             }*/
-
                         } catch (InputMismatchException e) {
-                            System.out.println("Entrada no válida. Por favor, ingresa un símbolo válido.");
-                            sc.next(); // Limpiar el búfer de entrada
+                            System.out.println(Idiomas.ERROR_GAMEMODE);
+                            sc.next();
                         }
                     } while (!simboloValido);
 
-                    System.out.println("Tu símbolo favorito es: " + simbolo1);
+                    System.out.println(Idiomas.NOMBRE2);
+                    String nombre2 = "";
+                    do {
+                        try {
+                            nombre2 = sc.next();
+                            if (!VerificadorDeDatos.validarNombres(nombre1, nombre2)) {
+                                System.out.println(Idiomas.ERROR_NOMBRES_IGUALES);
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println(Idiomas.ERROR_GAMEMODE);
+                            sc.next();
+                        }
+                    } while (!VerificadorDeDatos.validarNombres(nombre1, nombre2));
 
+                    do {
+                        try {
+                            simboloValido = VerificadorDeDatos.seleccionarSimbolo(sc, simbolo1);
+
+                        } catch (InputMismatchException e) {
+                            System.out.println(Idiomas.ERROR_GAMEMODE);
+                            sc.next(); // Limpiar el búfer de entrada
+                        }
+                    } while (!simboloValido);
                     Tablero tablero = new Tablero();
                     tablero.mostrarTablero();
                     modoValido = true;
                     break;
 
                 case "2":
-                    System.out.println(idiomas.NOMBRE1);
+                    // Jugador vs Maquina
+                    System.out.println(Idiomas.NOMBRE1);
                     String nombre = sc.next();
-                    System.out.println("Tu nombre es: " + nombre);
-                    System.out.println(idiomas.SIMBOLO1);
-                    System.out.println(ComprobadorSimbolos.imprimirSimbolos());
+                    System.out.println(Idiomas.SIMBOLO);
+                    System.out.println(VerificadorDeDatos.imprimirSimbolos());
                     int simbolo = 0;
                     boolean simboloValido1 = false;
                     do {
                         try {
-                            System.out.print("Elige un símbolo: ");
+                            System.out.print(Idiomas.ELEGIR_SIMBOLO);
                             simbolo = sc.nextInt();
-                            String simboloSeleccionado = ComprobadorSimbolos.obtenerSimbolo(simbolo);
+                            String simboloSeleccionado = VerificadorDeDatos.obtenerSimbolo(simbolo);
                             if (simboloSeleccionado != null) {
-                                System.out.println("Tu símbolo favorito es: " + simboloSeleccionado);
+                                System.out.println(Idiomas.SIMBOLO_FAV + simboloSeleccionado);
                                 simboloValido1 = true;
                             } else {
-                                System.out.println("El símbolo ingresado no está disponible. Por favor, elige uno de la lista.");
+                                System.out.println(Idiomas.ERROR_SIMBOLO);
                             }
                         } catch (InputMismatchException e) {
-                            System.out.println("Entrada no válida. Por favor, ingresa un símbolo válido.");
+                            System.out.println(Idiomas.ERROR_GAMEMODE);
                             sc.next();
                         }
                     } while (!simboloValido1);
 
-                    System.out.println("Tu símbolo favorito es: " + simbolo);
+                    System.out.println(Idiomas.SIMBOLO_FAV + simbolo);
 
                     tablero = new Tablero();
                     tablero.mostrarTablero();
@@ -119,7 +135,7 @@ public class CLI {
                     break;
 
                 default:
-                    System.out.println(idiomas.ERROR_GAMEMODE);
+                    System.out.println(Idiomas.ERROR_GAMEMODE);
                     break;
             }
         } while (!modoValido);
