@@ -60,6 +60,7 @@ public class CLI {
                             if (simboloSeleccionado != null) {
                                 System.out.println(Idiomas.SIMBOLO_FAV + simboloSeleccionado);
                                 simboloValido = true;
+
                             } else {
                                 System.out.println(Idiomas.ERROR_SIMBOLO);
                             }
@@ -69,6 +70,7 @@ public class CLI {
                         }
                     } while (!simboloValido);
 
+                    //JUGADOR 2
                     System.out.println(Idiomas.NOMBRE2);
                     String nombre2 = "";
                     do {
