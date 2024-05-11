@@ -1,7 +1,6 @@
 package edu.jesus_fdez.evidencia3.ui;
-
 import edu.jesus_fdez.evidencia3.process.ComprobadorSimbolos;
-
+import edu.jesus_fdez.evidencia3.process.Tablero;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -64,10 +63,10 @@ public class CLI {
                                 System.out.println("El símbolo ingresado no está disponible. Por favor, elige uno de la lista.");
                             }
                             /**if (ComprobadorSimbolos.esSimboloDisponible(String.valueOf(simbolo1))) {
-                                simboloValido = true;
-                            } else {
-                                System.out.println("El símbolo ingresado no está disponible. Por favor, elige uno de la lista.");
-                            }*/
+                             simboloValido = true;
+                             } else {
+                             System.out.println("El símbolo ingresado no está disponible. Por favor, elige uno de la lista.");
+                             }*/
 
                         } catch (InputMismatchException e) {
                             System.out.println("Entrada no válida. Por favor, ingresa un símbolo válido.");
@@ -76,13 +75,42 @@ public class CLI {
                     } while (!simboloValido);
 
                     System.out.println("Tu símbolo favorito es: " + simbolo1);
+
+                    Tablero tablero = new Tablero();
+                    tablero.mostrarTablero();
                     modoValido = true;
                     break;
 
                 case "2":
-                    // Jugador vs Maquina
-                    System.out.println("P v CPU");
-                    modoValido = true; // Cambiado aquí
+                    System.out.println(idiomas.NOMBRE1);
+                    String nombre = sc.next();
+                    System.out.println("Tu nombre es: " + nombre);
+                    System.out.println(idiomas.SIMBOLO1);
+                    System.out.println(ComprobadorSimbolos.imprimirSimbolos());
+                    int simbolo = 0;
+                    boolean simboloValido1 = false;
+                    do {
+                        try {
+                            System.out.print("Elige un símbolo: ");
+                            simbolo = sc.nextInt();
+                            String simboloSeleccionado = ComprobadorSimbolos.obtenerSimbolo(simbolo);
+                            if (simboloSeleccionado != null) {
+                                System.out.println("Tu símbolo favorito es: " + simboloSeleccionado);
+                                simboloValido1 = true;
+                            } else {
+                                System.out.println("El símbolo ingresado no está disponible. Por favor, elige uno de la lista.");
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Entrada no válida. Por favor, ingresa un símbolo válido.");
+                            sc.next();
+                        }
+                    } while (!simboloValido1);
+
+                    System.out.println("Tu símbolo favorito es: " + simbolo);
+
+                    tablero = new Tablero();
+                    tablero.mostrarTablero();
+                    modoValido = true;
                     break;
 
                 case "3":
