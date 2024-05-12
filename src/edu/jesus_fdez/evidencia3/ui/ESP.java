@@ -14,5 +14,16 @@ public class ESP extends Idiomas{
         ERROR_SIMBOLO = "Simbolo no disponible, eliga uno de la lista.";
         SIMBOLO_FAV = "Este es tu simbolo favorito: ";
         ERROR_NOMBRES_IGUALES = "Los nombres no pueden ser iguales intentelo de nuevo: ";
+        VOLVER_JUGAR = "¿Desean volver a jugar? (s/n)";
+        COMIENZA = "Comienza";
+        TERMINA_TURNO = "termina turno";
+        TURNO = "Tu turno: ";
+        TURNO_COMPUTADORA = "Turno de la computadora: ";
+        FELICITACION = "¡Felicidades, has ganado!";
+        COMPUTADORA_GANADORA = "La computadora ha ganado. ¡Inténtalo de nuevo!";
+        EMPATE ="El juego ha terminado en empate." ;
+        SIGUIENTE_TURNO = "Es el turno de: ";
+        FIN_COMPUTADORA = "Presione 'a' para ver el salón de la fama o 'b' para seguir jugando: ";
+        FINAL = "Muchas gracias por jugar! Programa Terminado :)";
     }
 }

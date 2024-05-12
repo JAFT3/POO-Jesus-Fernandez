@@ -20,6 +20,11 @@ public class Idiomas {
     public static String ERROR_POSICION;
     public static String ERROR_MOVIMIENTO;
     public static String COMIENZA;
+    public static String TURNO;
+    public static String TURNO_COMPUTADORA;
+    public static String COMPUTADORA_GANADORA;
+    public static String FIN_COMPUTADORA;
+    public static String FINAL;
     public static String TERMINA_TURNO;
     public static String VOLVER_JUGAR;
 
