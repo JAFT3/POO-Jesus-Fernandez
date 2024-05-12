@@ -49,17 +49,17 @@ public class CLI {
             switch (gamemode) {
                 case "1":
                     // Jugador vs Jugador
-
-                    System.out.println(Idiomas.NOMBRE1);
+                    // Jugador 1
+                    System.out.print(Idiomas.NOMBRE1);
                     String nombre1 = sc.next();
                     System.out.println(Idiomas.SIMBOLO);
                     System.out.println(VerificadorDeDatos.imprimirSimbolos());
-                    int simbolo1 = 0;
+                    char simbolo1 = 0;
                     boolean simboloValido = false;
                     do {
                         try {
                             System.out.print(Idiomas.ELEGIR_SIMBOLO);
-                            simbolo1 = sc.nextInt();
+                            simbolo1 = sc.next().charAt(0);
                             String simboloSeleccionado = VerificadorDeDatos.obtenerSimbolo(simbolo1);
                             if (simboloSeleccionado != null) {
                                 System.out.println(Idiomas.SIMBOLO_FAV + simboloSeleccionado);
@@ -74,46 +74,54 @@ public class CLI {
                     } while (!simboloValido);
 
                     // Crear instancia del Jugador 1 con el símbolo seleccionado
-                    Jugador jugador1 = new Jugador(nombre1, VerificadorDeDatos.obtenerSimbolo(simbolo1));
+                    Jugador jugador1 = new Jugador(nombre1, VerificadorDeDatos.obtenerSimbolo(simbolo1).charAt(0));
 
-                    //JUGADOR 2
-                    System.out.println(Idiomas.NOMBRE2);
-                    String nombre2 = "";
+                    // Jugador 2
+                    System.out.print(Idiomas.NOMBRE2);
+                    String nombre2;
+                    boolean nombresIguales;
                     do {
+                        nombre2 = sc.next();
+                        nombresIguales = VerificadorDeDatos.validarNombres(nombre1, nombre2);
+                        if (!nombresIguales) {
+                            System.out.println(Idiomas.ERROR_NOMBRES_IGUALES); // Añadir un salto de línea después del mensaje
+                        }
+                    } while (!nombresIguales);
+
+                    System.out.println(Idiomas.SIMBOLO);
+                    System.out.println(VerificadorDeDatos.imprimirSimbolos());
+                    char simbolo2 = 0; // Eliminar la inicialización
+                    simboloValido = false; // Inicializar la bandera de símbolo válido
+                    while (!simboloValido) {
                         try {
-                            nombre2 = sc.next();
-                            if (!VerificadorDeDatos.validarNombres(nombre1, nombre2)) {
-                                System.out.println(Idiomas.ERROR_NOMBRES_IGUALES);
+                            System.out.print(Idiomas.ELEGIR_SIMBOLO);
+                            simbolo2 = sc.next().charAt(0);
+                            String simboloSeleccionado = VerificadorDeDatos.obtenerSimbolo(simbolo2);
+                            if (simboloSeleccionado != null && VerificadorDeDatos.validarSimbolos(simbolo1, simbolo2)) {
+                                System.out.println(Idiomas.SIMBOLO_FAV + simboloSeleccionado);
+                                simboloValido = true;
+                            } else {
+                                System.out.println(Idiomas.ERROR_SIMBOLO);
                             }
                         } catch (InputMismatchException e) {
                             System.out.println(Idiomas.ERROR_GAMEMODE);
                             sc.next();
                         }
-                    } while (!VerificadorDeDatos.validarNombres(nombre1, nombre2));
-                    // Crear instancia del Jugador 1 con el símbolo seleccionado
-                    Jugador jugador2 = new Jugador(nombre1, VerificadorDeDatos.obtenerSimbolo(simbolo1));
-                    do {
-                        try {
-                            simboloValido = VerificadorDeDatos.seleccionarSimbolo(sc, simbolo1);
+                    }
 
-                        } catch (InputMismatchException e) {
-                            System.out.println(Idiomas.ERROR_GAMEMODE);
-                            sc.next(); // Limpiar el búfer de entrada
-                        }
-
-                    } while (!simboloValido);
                     Tablero tablero = new Tablero();
                     tablero.mostrarTablero();
                     modoValido = true;
-                    String simboloJugador1 = jugador1.getSimbolo();
-                    String simboloJugador2 = jugador2.getSimbolo();
-                    break;
+                    char simboloJugador1 = jugador1.getSimbolo();
+                    String simboloJugador2 = VerificadorDeDatos.obtenerSimbolo(simbolo2);// Obtener el símbolo del jugador 2
 
+
+                    break;
                 case "2":
                     // Jugador vs Maquina
-                    System.out.println(Idiomas.NOMBRE1);
+                    System.out.print(Idiomas.NOMBRE1);
                     String nombre = sc.next();
-                    System.out.println(Idiomas.SIMBOLO);
+                    System.out.print(Idiomas.SIMBOLO);
                     System.out.println(VerificadorDeDatos.imprimirSimbolos());
                     int simbolo = 0;
                     boolean simboloValido1 = false;

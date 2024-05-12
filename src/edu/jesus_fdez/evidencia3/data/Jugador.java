@@ -4,9 +4,9 @@ import edu.jesus_fdez.evidencia3.process.Tablero;
 
 public class Jugador {
     private String nombre;
-    private String simbolo;
+    private char simbolo;
 
-    public Jugador(String nombre, String simbolo) {
+    public Jugador(String nombre, char simbolo) {
         this.nombre = nombre;
         this.simbolo = simbolo;
     }
@@ -15,7 +15,7 @@ public class Jugador {
         return nombre;
     }
 
-    public String getSimbolo() {
+    public char getSimbolo() {
         return simbolo;
     }
 

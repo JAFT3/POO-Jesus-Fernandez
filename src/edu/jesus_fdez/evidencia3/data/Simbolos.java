@@ -24,21 +24,21 @@ public class Simbolos {
     public static final String ROBOT = "\uD83E\uDD16";
 
     public static final List<String> listaSimbolos = new ArrayList<>();
-    public static final Map<String, Integer> simbolosConValor = new HashMap<>();
+    public static final Map<String, Character> simbolosConValor = new HashMap<>();
 
     static {
-        simbolosConValor.put(TACHA, 8);
-        simbolosConValor.put(CIRCULO, 10);
-        simbolosConValor.put(ESTRELLA, 6);
-        simbolosConValor.put(SOL, 11);
-        simbolosConValor.put(PICA, 1);
-        simbolosConValor.put(DIAMANTE, 7);
-        simbolosConValor.put(TREBOL, 3);
-        simbolosConValor.put(CORAZON, 5);
-        simbolosConValor.put(PAZ, 12);
-        simbolosConValor.put(SONRIENTE, 9);
-        simbolosConValor.put(ANCLA, 4);
-        simbolosConValor.put(PARAGUAS, 2);
+        simbolosConValor.put(TACHA, '8');
+        simbolosConValor.put(CIRCULO, '1');
+        simbolosConValor.put(ESTRELLA, '6');
+        simbolosConValor.put(SOL, '1');
+        simbolosConValor.put(PICA, '1');
+        simbolosConValor.put(DIAMANTE, '7');
+        simbolosConValor.put(TREBOL, '3');
+        simbolosConValor.put(CORAZON, '5');
+        simbolosConValor.put(PAZ, '1');
+        simbolosConValor.put(SONRIENTE, '9');
+        simbolosConValor.put(ANCLA, '4');
+        simbolosConValor.put(PARAGUAS, '2');
 
         listaSimbolos.addAll(simbolosConValor.keySet());
         listaSimbolos.remove("\uD83E\uDD16");
