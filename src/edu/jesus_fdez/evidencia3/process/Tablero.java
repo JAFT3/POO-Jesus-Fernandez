@@ -4,27 +4,23 @@ public class Tablero {
     private char[][] tablero;
 
     public Tablero() {
+        tablero = new char[3][3];
         inicializarTablero();
     }
 
+
+
     private void inicializarTablero() {
-        tablero = new char[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 tablero[i][j] = ' ';
             }
         }
     }
-    public void reiniciarTablero() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                tablero[i][j] = ' ';
-            }
-        }
-    }
+
     public void mostrarTablero() {
         System.out.println("Tablero:");
-        System.out.println("   A   B   C");
+        System.out.println("   1   2   3");
         System.out.println(" ╔═══╦═══╦═══╗");
         for (int i = 0; i < 3; i++) {
             System.out.print((i + 1) + "║");
@@ -39,12 +35,9 @@ public class Tablero {
         System.out.println(" ╚═══╩═══╩═══╝");
     }
 
-    public boolean colocarSimbolo(int fila, int columna, char simbolo){
-        if (fila < 0 || fila >= 3 || columna < 0 || columna >= 3) {
-            throw new IllegalArgumentException("Los índices de fila y columna están fuera de los límites del tablero.");
-        }
 
-        if (tablero[fila][columna] == ' ') {
+    public boolean colocarSimbolo(int fila, int columna, char simbolo){
+        if (fila >= 0 && fila < 3 && columna >= 0 && columna < 3 && tablero[fila][columna] == ' ') {
             tablero[fila][columna] = simbolo;
             return true;
         } else {

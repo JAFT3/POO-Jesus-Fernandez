@@ -6,7 +6,10 @@ import static edu.jesus_fdez.evidencia3.ui.CLI.launchApp;
 
 public class Main {
     public static void main(String[] args){
-        //Simbolos.imprimirSimbolos();
-        launchApp();
+        try{
+            CLI.launchApp();
+        }catch (Exception e ){
+            System.out.println("Error inesperado " + e);
+        }
     }
 }
