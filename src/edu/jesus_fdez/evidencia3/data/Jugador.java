@@ -1,6 +1,9 @@
 package edu.jesus_fdez.evidencia3.data;
 
 import edu.jesus_fdez.evidencia3.process.Tablero;
+import edu.jesus_fdez.evidencia3.ui.Idiomas;
+
+import java.util.Scanner;
 
 public class Jugador {
     private String nombre;
@@ -19,9 +22,4 @@ public class Jugador {
         return simbolo;
     }
 
-    // Método para que un jugador realice un movimiento
-    public void realizarMovimiento(Tablero tablero, int fila, String columna) {
-        // Lógica para que el jugador realice un movimiento
-        tablero.colocarSimbolo(fila, Integer.parseInt(columna), simbolo);
-    }
 }

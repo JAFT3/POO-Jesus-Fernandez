@@ -12,4 +12,16 @@ public class Idiomas {
     public static String ERROR_SIMBOLO;
     public static String SIMBOLO_FAV;
     public static String ERROR_NOMBRES_IGUALES;
+    public static String SIGUIENTE_TURNO;
+    public static String FILA;
+    public static String COLUMNA;
+    public static String FELICITACION;
+    public static String EMPATE;
+    public static String ERROR_POSICION;
+    public static String ERROR_MOVIMIENTO;
+    public static String COMIENZA;
+    public static String TERMINA_TURNO;
+    public static String VOLVER_JUGAR;
+
+
 }

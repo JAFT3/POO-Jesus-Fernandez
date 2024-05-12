@@ -1,15 +1,21 @@
 package edu.jesus_fdez.evidencia3.ui;
 
+import edu.jesus_fdez.evidencia3.data.Humano;
 import edu.jesus_fdez.evidencia3.data.Jugador;
 import edu.jesus_fdez.evidencia3.data.Simbolos;
+import edu.jesus_fdez.evidencia3.process.TicTacToe;
 import edu.jesus_fdez.evidencia3.process.VerificadorDeDatos;
 import edu.jesus_fdez.evidencia3.process.Tablero;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static edu.jesus_fdez.evidencia3.process.TicTacToe.*;
+
 public class CLI {
     public static Idiomas idiomas = new ESP(); // Idioma por defecto
+    private static boolean continuarJugando = true;
+
 
     public static void showMenuIdiomas() {
         System.out.println(idiomas.MENU_IDIOMA);
@@ -73,10 +79,8 @@ public class CLI {
                         }
                     } while (!simboloValido);
 
-                    // Crear instancia del Jugador 1 con el símbolo seleccionado
-                    Jugador jugador1 = new Jugador(nombre1, VerificadorDeDatos.obtenerSimbolo(simbolo1).charAt(0));
-
-                    // Jugador 2
+                    /** Jugador 2*/
+                    /** Solicita el nombre y comprueba que no sea el mismo que escogio el jugador1 */
                     System.out.print(Idiomas.NOMBRE2);
                     String nombre2;
                     boolean nombresIguales;
@@ -92,6 +96,9 @@ public class CLI {
                     System.out.println(VerificadorDeDatos.imprimirSimbolos());
                     char simbolo2 = 0; // Eliminar la inicialización
                     simboloValido = false; // Inicializar la bandera de símbolo válido
+
+                    /**Se elige el simbolo y se comprueba si esta disponible*/
+
                     while (!simboloValido) {
                         try {
                             System.out.print(Idiomas.ELEGIR_SIMBOLO);
@@ -109,11 +116,23 @@ public class CLI {
                         }
                     }
 
-                    Tablero tablero = new Tablero();
-                    tablero.mostrarTablero();
+                    /** Crear instancia del Jugador 1 con el símbolo seleccionado*/
+                    Humano jugador1 = new Humano(nombre1, VerificadorDeDatos.obtenerSimbolo(simbolo1).charAt(0));
+                    Humano jugador2 = new Humano(nombre2, VerificadorDeDatos.obtenerSimbolo(simbolo2).charAt(0));
                     modoValido = true;
-                    char simboloJugador1 = jugador1.getSimbolo();
-                    String simboloJugador2 = VerificadorDeDatos.obtenerSimbolo(simbolo2);// Obtener el símbolo del jugador 2
+
+                    while (continuarJugando) {
+                        // Generar turno para el jugador1 o jugador2
+                        generarTurnoPersona(jugador1, jugador2);
+                        // Preguntar si desean volver a jugar
+                        System.out.println(Idiomas.VOLVER_JUGAR);
+                        String respuesta = sc.nextLine();
+                        if (!respuesta.equalsIgnoreCase("s")&&!respuesta.equalsIgnoreCase("y")) {
+                            continuarJugando = false;
+                        }
+                    }
+                    /*char simboloJugador1 = jugador1.getSimbolo();
+                    String simboloJugador2 = VerificadorDeDatos.obtenerSimbolo(simbolo2);// Obtener el símbolo del jugador 2*/
 
 
                     break;
@@ -144,21 +163,19 @@ public class CLI {
 
                     System.out.println(Idiomas.SIMBOLO_FAV + simbolo);
 
-                    tablero = new Tablero();
+                    // Crear instancia de Tablero y mostrarlo
+                    Tablero tablero = new Tablero();
                     tablero.mostrarTablero();
                     modoValido = true;
                     break;
-
                 case "3":
                     // Salir
                     modoValido = true;
                     break;
-
                 default:
                     System.out.println(Idiomas.ERROR_GAMEMODE);
                     break;
             }
-
         } while (!modoValido);
     }
 }
