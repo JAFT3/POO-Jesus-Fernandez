@@ -17,12 +17,7 @@ public class CLI {
 
     /**Este metodo imprime el menu de idiomas.*/
     public static void mostrarMenuIdiomas() {
-        System.out.println("""
-                --------------------------------------------------------------------------
-                Seleccione su idioma / Select your language / 选择您使用的语言:
-                ESP: Español / Spanish / スペイン語
-                ENG: Inglés / English / 英語
-                MAND: Mandarin / Mandarin / 普通话""");
+        System.out.println(Idiomas.MENU);
     }
 
     /**Este metodo es para que el usuario elija su modo de juego.*/
