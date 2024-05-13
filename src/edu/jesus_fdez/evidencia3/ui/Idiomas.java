@@ -35,7 +35,7 @@ public class Idiomas {
     public static String COMPUTADORA_VICTORIA;
     public static String OPCION_INVALIDA;
     public static String ERROR_INESPERADO;
-    public static String MENU;
+
 
     /**Este metodo nos permite obtener la instancia del idioma que el usuario escoja para poder
      * asignarle un texto en dicho idioma a cada variable*/
@@ -43,12 +43,6 @@ public class Idiomas {
         Textos opcion = Textos.valueOf(idioma);
         switch (opcion) {
             case ESP:
-                MENU = "\"\"\"\n" +
-                        "                --------------------------------------------------------------------------\n" +
-                        "                Seleccione su idioma / Select your language / 选择您使用的语言:\n" +
-                        "                ESP: Español / Spanish / スペイン語\n" +
-                        "                ENG: Inglés / English / 英語\n" +
-                        "                MAND: Mandarin / Mandarin / 普通话\"\"\"";
                 BIENVENIDA = "¡Bienvenido al juego de tres en raya!";
                 SELECCIONE_OPCION = "Seleccione el modo de juego: ";
                 PERSONAVPERSONA = "1. Jugador contra jugador";
@@ -88,12 +82,6 @@ public class Idiomas {
                 break;
 
             case ENG:
-                MENU = "\"\"\"\n" +
-                        "                --------------------------------------------------------------------------\n" +
-                        "                Seleccione su idioma / Select your language / 选择您使用的语言:\n" +
-                        "                ESP: Español / Spanish / スペイン語\n" +
-                        "                ENG: Inglés / English / 英語\n" +
-                        "                MAND: Mandarin / Mandarin / 普通话\"\"\"";
                 BIENVENIDA = "Welcome to the game of tic-tac-toe!";
                 SELECCIONE_OPCION = "Select game mode: ";
                 PERSONAVPERSONA = "1. Player vs. player";
@@ -132,12 +120,6 @@ public class Idiomas {
                 break;
 
             case MAND:
-                MENU = "\"\"\"\n" +
-                        "                --------------------------------------------------------------------------\n" +
-                        "                Seleccione su idioma / Select your language / 选择您使用的语言:\n" +
-                        "                ESP: Español / Spanish / スペイン語\n" +
-                        "                ENG: Inglés / English / 英語\n" +
-                        "                MAND: Mandarin / Mandarin / 普通话\"\"\"";
                 BIENVENIDA = "欢迎来到井字棋游戏！";
                 SELECCIONE_OPCION = "ゲームモードを選択します: ";
                 PERSONAVPERSONA = "选择游戏模式：";
