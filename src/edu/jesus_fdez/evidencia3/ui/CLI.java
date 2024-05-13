@@ -1,164 +1,267 @@
 package edu.jesus_fdez.evidencia3.ui;
 
 import edu.jesus_fdez.evidencia3.data.Jugador;
-import edu.jesus_fdez.evidencia3.data.Simbolos;
-import edu.jesus_fdez.evidencia3.process.VerificadorDeDatos;
 import edu.jesus_fdez.evidencia3.process.Tablero;
 
-import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
+import static edu.jesus_fdez.evidencia3.process.Tablero.*;
+
+
+/**Esta clase es la clase de interfaz donde se imprimirán todas las variables y el usuario seleccionara
+ * el idioma y modo de juego*/
 public class CLI {
-    public static Idiomas idiomas = new ESP(); // Idioma por defecto
+    private static boolean contraComputadora;
+    static Scanner scanner = new Scanner(System.in);
 
-    public static void showMenuIdiomas() {
-        System.out.println(idiomas.MENU_IDIOMA);
-
+    /**Este metodo imprime el menu de idiomas.*/
+    public static void mostrarMenuIdiomas() {
+        System.out.println("""
+                --------------------------------------------------------------------------
+                Seleccione su idioma / Select your language / 选择您使用的语言:
+                ESP: Español / Spanish / スペイン語
+                ENG: Inglés / English / 英語
+                MAND: Mandarin / Mandarin / 普通话""");
     }
 
-    public static void launchApp() {
-        Scanner sc = new Scanner(System.in);
-        boolean idiomaValido = false;
+    /**Este metodo es para que el usuario elija su modo de juego.*/
+    public static boolean seleccionarModoJuego(){
+        System.out.println(Idiomas.BIENVENIDA);
+        System.out.println(Idiomas.SELECCIONE_OPCION);
+        System.out.println(Idiomas.PERSONAVPERSONA);
+        System.out.println(Idiomas.PERSONAVCOMPUTADORA);
+
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+
+        if (opcion == 1){
+            return false;
+        } else if (opcion == 2) {
+            return true;
+        } else {
+            System.out.println(Idiomas.OPCION_INVALIDA);
+            return seleccionarModoJuego();
+        }
+    }
+
+    /**Este metodo nos permite iniciar el juego con un bucle en el que se define el modo de juego y que,
+     * si el usuario desea, puede jugar otra partida.*/
+    public static void iniciarJuego() {
 
         do {
-            showMenuIdiomas();
-            String idioma = sc.next();
-            switch (idioma.toUpperCase()) {
-                case "ESP":
-                    idiomas = new ESP();
-                    idiomaValido = true;
-                    break;
-                case "ENG":
-                    idiomas = new ENG();
-                    idiomaValido = true;
-                    break;
-                case "MAND":
-                    idiomas = new MAND();
-                    idiomaValido = true;
-                    break;
-                default:
-                    System.out.println(idiomas.ERROR_IDIOMA);
-                    break;
+            if (!contraComputadora) {
+                jugarContraJugador();
+            } else {
+                jugarContraComputadora();
             }
-        } while (!idiomaValido);
 
-        boolean modoValido = false;
+            System.out.println(Idiomas.JUGAR_DE_NUEVO);
+            String respuesta = scanner.nextLine().toLowerCase();
+
+            while (!respuesta.equals("si") && !respuesta.equals("no")) {
+                System.out.println(Idiomas.RESPUESTA_INVALIDA);
+                respuesta = scanner.nextLine().toLowerCase();
+            }
+
+            if (respuesta.equals("no")) {
+                System.out.println(Idiomas.GRACIAS_POR_JUGAR);
+                break;
+            }
+
+            // Reiniciar el tablero para iniciar una nueva partida
+            Tablero.reiniciarTablero();
+
+        } while (true);
+        // Mostrar el salón de la fama al finalizar el juego
+        salonDeLaFama.mostrar();
+    }
+
+    /**Este metodo es el que nos permite jugar contra otro jugador, contiene validaciones de ingreso de datos.*/
+    private static void jugarContraJugador() {
+        // Elegir aleatoriamente quién empieza
+        turnoJugador1 = new Random().nextBoolean();
+        System.out.println(Idiomas.NUEVA_PARTIDA);
+
+        System.out.print(Idiomas.NOMBRE_JUGADOR1);
+        String nombreJugador1 = scanner.nextLine();
+        while (cadenaVacia(nombreJugador1)) {
+            System.out.println(Idiomas.NOMBRE_VACIO);
+            System.out.print(Idiomas.NOMBRE_JUGADOR1);
+            nombreJugador1 = scanner.nextLine();
+        }
+        System.out.print(Idiomas.SIMBOLO_JUGADOR1);
+        String simboloJugador1 = scanner.nextLine().toUpperCase();
+
+        while (cadenaVacia(simboloJugador1) || simboloJugador1.length() != 1 ||
+                !simbolosValidos.contains(simboloJugador1)) {
+            System.out.println(Idiomas.SIMBOLO_NO_VALIDO);
+            System.out.print(Idiomas.INGRESE_SIMBOLO);
+            simboloJugador1 = scanner.nextLine().toUpperCase();
+        }
+
+        jugador1 = new Jugador(nombreJugador1, simboloJugador1);
+
+
+        String nombreJugador2;
         do {
-            System.out.println(Idiomas.MENU);
-            String gamemode = sc.next();
-            switch (gamemode) {
-                case "1":
-                    // Jugador vs Jugador
-                    // Jugador 1
-                    System.out.print(Idiomas.NOMBRE1);
-                    String nombre1 = sc.next();
-                    System.out.println(Idiomas.SIMBOLO);
-                    System.out.println(VerificadorDeDatos.imprimirSimbolos());
-                    char simbolo1 = 0;
-                    boolean simboloValido = false;
-                    do {
-                        try {
-                            System.out.print(Idiomas.ELEGIR_SIMBOLO);
-                            simbolo1 = sc.next().charAt(0);
-                            String simboloSeleccionado = VerificadorDeDatos.obtenerSimbolo(simbolo1);
-                            if (simboloSeleccionado != null) {
-                                System.out.println(Idiomas.SIMBOLO_FAV + simboloSeleccionado);
-                                simboloValido = true;
-                            } else {
-                                System.out.println(Idiomas.ERROR_SIMBOLO);
-                            }
-                        } catch (InputMismatchException e) {
-                            System.out.println(Idiomas.ERROR_GAMEMODE);
-                            sc.next();
-                        }
-                    } while (!simboloValido);
+            System.out.print(Idiomas.NOMBRE_JUGADOR2);
+            nombreJugador2 = scanner.nextLine();
+            if (nombreJugador2.equalsIgnoreCase(nombreJugador1)) {
+                System.out.println(Idiomas.NOMBRE_JUGADOR2_DIFERENTE);
+            }
+        } while (nombreJugador2.equalsIgnoreCase(nombreJugador1));
 
-                    // Crear instancia del Jugador 1 con el símbolo seleccionado
-                    Jugador jugador1 = new Jugador(nombre1, VerificadorDeDatos.obtenerSimbolo(simbolo1).charAt(0));
+        String simboloJugador2;
+        System.out.print(Idiomas.SIMBOLO_JUGADOR2 + simboloJugador1 + "): ");
+        simboloJugador2 = scanner.nextLine().toUpperCase();
 
-                    // Jugador 2
-                    System.out.print(Idiomas.NOMBRE2);
-                    String nombre2;
-                    boolean nombresIguales;
-                    do {
-                        nombre2 = sc.next();
-                        nombresIguales = VerificadorDeDatos.validarNombres(nombre1, nombre2);
-                        if (!nombresIguales) {
-                            System.out.println(Idiomas.ERROR_NOMBRES_IGUALES); // Añadir un salto de línea después del mensaje
-                        }
-                    } while (!nombresIguales);
+        while (simboloJugador2.equals(simboloJugador1) || cadenaVacia(simboloJugador2) ||
+                simboloJugador2.length() != 1 || !simbolosValidos.contains(simboloJugador2)) {
+            System.out.println(Idiomas.SIMBOLO_DIFERENTE + simboloJugador1);
+            System.out.print(Idiomas.SIMBOLO_JUGADOR2 + simboloJugador1 + "): ");
+            simboloJugador2 = scanner.nextLine().toUpperCase();
+        }
+        jugador2 = new Jugador(nombreJugador2, simboloJugador2);
 
-                    System.out.println(Idiomas.SIMBOLO);
-                    System.out.println(VerificadorDeDatos.imprimirSimbolos());
-                    char simbolo2 = 0; // Eliminar la inicialización
-                    simboloValido = false; // Inicializar la bandera de símbolo válido
-                    while (!simboloValido) {
-                        try {
-                            System.out.print(Idiomas.ELEGIR_SIMBOLO);
-                            simbolo2 = sc.next().charAt(0);
-                            String simboloSeleccionado = VerificadorDeDatos.obtenerSimbolo(simbolo2);
-                            if (simboloSeleccionado != null && VerificadorDeDatos.validarSimbolos(simbolo1, simbolo2)) {
-                                System.out.println(Idiomas.SIMBOLO_FAV + simboloSeleccionado);
-                                simboloValido = true;
-                            } else {
-                                System.out.println(Idiomas.ERROR_SIMBOLO);
-                            }
-                        } catch (InputMismatchException e) {
-                            System.out.println(Idiomas.ERROR_GAMEMODE);
-                            sc.next();
-                        }
-                    }
+        imprimirTablero(); // Imprimir el tablero antes de solicitar la siguiente jugada
 
-                    Tablero tablero = new Tablero();
-                    tablero.mostrarTablero();
-                    modoValido = true;
-                    char simboloJugador1 = jugador1.getSimbolo();
-                    String simboloJugador2 = VerificadorDeDatos.obtenerSimbolo(simbolo2);// Obtener el símbolo del jugador 2
-
-
-                    break;
-                case "2":
-                    // Jugador vs Maquina
-                    System.out.print(Idiomas.NOMBRE1);
-                    String nombre = sc.next();
-                    System.out.print(Idiomas.SIMBOLO);
-                    System.out.println(VerificadorDeDatos.imprimirSimbolos());
-                    int simbolo = 0;
-                    boolean simboloValido1 = false;
-                    do {
-                        try {
-                            System.out.print(Idiomas.ELEGIR_SIMBOLO);
-                            simbolo = sc.nextInt();
-                            String simboloSeleccionado = VerificadorDeDatos.obtenerSimbolo(simbolo);
-                            if (simboloSeleccionado != null) {
-                                System.out.println(Idiomas.SIMBOLO_FAV + simboloSeleccionado);
-                                simboloValido1 = true;
-                            } else {
-                                System.out.println(Idiomas.ERROR_SIMBOLO);
-                            }
-                        } catch (InputMismatchException e) {
-                            System.out.println(Idiomas.ERROR_GAMEMODE);
-                            sc.next();
-                        }
-                    } while (!simboloValido1);
-
-                    System.out.println(Idiomas.SIMBOLO_FAV + simbolo);
-
-                    tablero = new Tablero();
-                    tablero.mostrarTablero();
-                    modoValido = true;
-                    break;
-
-                case "3":
-                    // Salir
-                    modoValido = true;
-                    break;
-
-                default:
-                    System.out.println(Idiomas.ERROR_GAMEMODE);
-                    break;
+        while (true) {
+            if (turnoJugador1) {
+                turnoJugador(jugador1);
+            } else {
+                turnoJugador(jugador2);
             }
 
-        } while (!modoValido);
+            if (verificarVictoria()) {
+                System.out.println("¡" + (turnoJugador1 ? jugador1.getNombre() : jugador2.getNombre()) +
+                        Idiomas.HA_GANADO);
+                break;
+            }
+            if (tableroLleno()) {
+                System.out.println(Idiomas.EMPATE);
+                break;
+            }
+
+            turnoJugador1 = !turnoJugador1;
+        }
+
+        // Actualizar el salón de la fama
+        if (verificarVictoria()) {
+            salonDeLaFama.actualizar(turnoJugador1 ? jugador1.getNombre() : jugador2.getNombre());
+        }
+
+        // Imprimir el salón de la fama al final de la partida
+        salonDeLaFama.mostrar();
+    }
+
+    /**Este metodo nos permite jugar contra la computadora*/
+    public static void jugarContraComputadora(){
+        System.out.println(Idiomas.NUEVA_PARTIDA);
+        System.out.print(Idiomas.NOMBRE);
+        String nombreJugador1 = scanner.nextLine();
+        while (cadenaVacia(nombreJugador1)) {
+            System.out.println(Idiomas.NOMBRE_VACIO);
+            System.out.print(Idiomas.NOMBRE);
+            nombreJugador1 = scanner.nextLine();
+        }
+        System.out.print(Idiomas.INGRESE_SIMBOLO);
+        String simboloJugador1 = scanner.nextLine().toUpperCase();
+
+        while (cadenaVacia(simboloJugador1) || simboloJugador1.length() != 1 ||
+                !simbolosValidos.contains(simboloJugador1)) {
+            System.out.println(Idiomas.SIMBOLO_NO_VALIDO);
+            System.out.print(Idiomas.INGRESE_SIMBOLO);
+            simboloJugador1 = scanner.nextLine().toUpperCase();
+        }
+        jugador1 = new Jugador(nombreJugador1, simboloJugador1);
+        jugador2 = new Jugador("Computadora", simboloJugador1.equals("X") ? "O" : "X");
+
+        imprimirTablero();
+
+        while (true) {
+            if (turnoJugador1) {
+                turnoJugador(jugador1);
+            } else {
+                turnoComputadora();
+            }
+
+            if (verificarVictoria()) {
+                System.out.println("¡" + (turnoJugador1 ? jugador1.getNombre() : jugador2.getNombre()) +
+                        Idiomas.HA_GANADO);
+                break;
+            }
+            if (tableroLleno()) {
+                System.out.println(Idiomas.EMPATE);
+                break;
+            }
+
+            turnoJugador1 = !turnoJugador1;
+        }
+
+        // Actualizar el salón de la fama
+        if (verificarVictoria()) {
+            salonDeLaFama.actualizar(jugador1.getNombre());
+        }
+    }
+
+    /**Este metodo se ejecuta en cada turno de jugador, para poder saber si el movimiento es correcto.*/
+    public static void turnoJugador(Jugador jugador) {
+        System.out.println(Idiomas.TURNO + jugador.getNombre() + " (" + jugador.getSimbolo() + ")");
+
+        // Solicitar la fila
+        int fila;
+        do {
+            System.out.print(Idiomas.FILA);
+            String inputFila = scanner.nextLine();
+            try {
+                fila = Integer.parseInt(inputFila) - 1; // Ajustar la fila ingresada a la indexación del arreglo
+            } catch (NumberFormatException e) {
+                System.out.println(Idiomas.NUMERO_INVALIDO);
+                fila = -1; // Valor inválido para continuar el bucle
+            }
+            if (fila < 0 || fila > 2 || filaLlena(fila)) {
+                System.out.println(Idiomas.FILA_INVALIDA);
+            }
+        } while (fila < 0 || fila > 2 || filaLlena(fila));
+
+        // Solicitar la columna
+        int columna;
+        do {
+            System.out.print(Idiomas.COLUMNA);
+            String inputColumna = scanner.nextLine();
+            try {
+                columna = Integer.parseInt(inputColumna) - 1; // Ajustar la columna ingresada a la indexación del arreglo
+            } catch (NumberFormatException e) {
+                System.out.println(Idiomas.NUMERO_INVALIDO);
+                columna = -1; // Valor inválido para continuar el bucle
+            }
+            if (columna < 0 || columna > 2 || columnaLlena(columna)) {
+                System.out.println(Idiomas.COLUMNA_INVALIDA);
+            }
+        } while (columna < 0 || columna > 2 || columnaLlena(columna));
+
+        // Verificar si la casilla está ocupada
+        if (tablero[fila][columna] != '-') {
+            System.out.println(Idiomas.CASILLA_OCUPADA);
+            turnoJugador(jugador); // Solicitar una nueva jugada
+        } else {
+            // Colocar el símbolo en el tablero
+            tablero[fila][columna] = jugador.getSimbolo().charAt(0);
+            imprimirTablero();
+        }
+    }
+
+    /**Este metodo es el que nos permite iniciar
+     *  toda la aplicacion.*/
+    public static void launchGame() {
+        mostrarMenuIdiomas();
+        String idiomaSeleccionado = scanner.nextLine().toUpperCase();
+        Idiomas.getInstance(idiomaSeleccionado);
+
+        contraComputadora = seleccionarModoJuego(); // Obtener el valor del modo de juego
+        Tablero juego = new Tablero(contraComputadora); // Crear una instancia de Juego con el modo de juego seleccionado
+
+        iniciarJuego();
     }
 }
