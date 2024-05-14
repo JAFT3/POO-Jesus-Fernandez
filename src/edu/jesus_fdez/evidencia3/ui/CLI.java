@@ -3,6 +3,7 @@ package edu.jesus_fdez.evidencia3.ui;
 import edu.jesus_fdez.evidencia3.data.Jugador;
 import edu.jesus_fdez.evidencia3.process.Tablero;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -25,27 +26,54 @@ public class CLI {
                 MAND: Mandarin / Mandarin / 普通话""");
     }
 
-    /**Este metodo es para que el usuario elija su modo de juego.*/
-    public static boolean seleccionarModoJuego(){
-        System.out.println(Idiomas.BIENVENIDA);
-        System.out.println(Idiomas.SELECCIONE_OPCION);
-        System.out.println(Idiomas.PERSONAVPERSONA);
-        System.out.println(Idiomas.PERSONAVCOMPUTADORA);
+    /**Este metodo es el que nos permite iniciar
+     *  toda la aplicacion.*/
+    public static void launchApp() {
+        String idiomaSeleccionado;
 
-        int opcion = scanner.nextInt();
-        scanner.nextLine();
+        do {
+            menuIdiomas();
+            idiomaSeleccionado = scanner.nextLine().toUpperCase();
+        } while (!idiomaSeleccionado.equals("ESP") && !idiomaSeleccionado.equals("ENG")&&!idiomaSeleccionado.equals("MAND"));
 
-        if (opcion == 1){
-            return false;
-        } else if (opcion == 2) {
-            return true;
-        } else {
-            System.out.println(Idiomas.OPCION_INVALIDA);
-            return seleccionarModoJuego();
-        }
+        Idiomas.getInstance(idiomaSeleccionado);
+
+        contraComputadora = seleccionarModoJuego(); // Obtener el valor del modo de juego
+        Tablero juego = new Tablero(contraComputadora); // Crear una instancia de Juego con el modo de juego seleccionado
+
+        startGame();
     }
 
-    /**Este metodo nos permite iniciar el juego con un bucle en el que se define el modo de juego y que,
+    /**Este metodo es para que el usuario elija su modo de juego.*/
+    public static boolean seleccionarModoJuego(){
+        int opcion;
+
+        do {
+            System.out.println(Idiomas.BIENVENIDA);
+            System.out.println(Idiomas.SELECCIONE_OPCION);
+            System.out.println(Idiomas.PERSONAVPERSONA);
+            System.out.println(Idiomas.PERSONAVCOMPUTADORA);
+
+            try {
+                opcion = scanner.nextInt();
+                scanner.nextLine();
+
+                if (opcion == 1){
+                    return false;
+                } else if (opcion == 2) {
+                    return true;
+                } else {
+                    System.out.println(Idiomas.OPCION_INVALIDA);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println(Idiomas.OPCION_INVALIDA);
+                scanner.nextLine(); // Limpiar el buffer del scanner
+            }
+        } while (true);
+    }
+
+
+/**Este metodo nos permite iniciar el juego con un bucle en el que se define el modo de juego y que,
      * si el usuario desea, puede jugar otra partida.*/
     public static void startGame() {
 
@@ -252,40 +280,4 @@ public class CLI {
         }
     }
 
-    /**Este metodo es el que nos permite iniciar
-     *  toda la aplicacion.*/
-    public static void launchApp() {
-        boolean idiomaValido = false;
-        do {
-            try {
-                menuIdiomas();
-                String idiomaSeleccionado = scanner.nextLine().toUpperCase();
-                Idiomas idioma = Idiomas.getInstance(idiomaSeleccionado);
-                if (idioma == null) {
-                    throw new IllegalArgumentException("Idioma no válido: " + idiomaSeleccionado);
-                }
-
-                // Resto de la lógica aquí
-                contraComputadora = seleccionarModoJuego(); // Obtener el valor del modo de juego
-                Tablero juego = new Tablero(contraComputadora); // Crear una instancia de Juego con el modo de juego seleccionado
-                startGame();
-
-                idiomaValido = true; // Si llegamos aquí, el idioma es válido y podemos salir del bucle
-            } catch (IllegalArgumentException e) {
-                System.err.println("Error: " + e.getMessage());
-                System.out.println("¿Desea intentarlo de nuevo? (s/n): ");
-                String respuesta = scanner.nextLine();
-                if (!respuesta.equalsIgnoreCase("s")) {
-                    break; // Si la respuesta no es "s", salimos del bucle
-                }
-            } catch (Exception e) {
-                System.err.println(Idiomas.ERROR_INESPERADO);
-            }
-        } while (!idiomaValido);
-
-        contraComputadora = seleccionarModoJuego(); // Obtener el valor del modo de juego
-        Tablero juego = new Tablero(contraComputadora); // Crear una instancia de Juego con el modo de juego seleccionado
-
-        startGame();
-    }
 }

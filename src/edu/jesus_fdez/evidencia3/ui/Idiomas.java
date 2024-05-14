@@ -161,6 +161,7 @@ public class Idiomas {
                 ERROR_INESPERADO = "意外的错误";
                 INTENTAR_NUEVAMENTE = "再试一次吗？（s= 是/n= 否";
                 break;
+
             default:
                 throw new IllegalArgumentException("Invalid language selection");
         }
