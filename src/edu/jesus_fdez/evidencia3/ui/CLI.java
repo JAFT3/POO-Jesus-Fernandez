@@ -16,7 +16,7 @@ public class CLI {
     static Scanner scanner = new Scanner(System.in);
 
     /**Este metodo imprime el menu de idiomas.*/
-    public static void mostrarMenuIdiomas() {
+    public static void menuIdiomas() {
         System.out.println("""
                 --------------------------------------------------------------------------
                 Seleccione su idioma / Select your language / 选择您使用的语言:
@@ -47,13 +47,13 @@ public class CLI {
 
     /**Este metodo nos permite iniciar el juego con un bucle en el que se define el modo de juego y que,
      * si el usuario desea, puede jugar otra partida.*/
-    public static void iniciarJuego() {
+    public static void startGame() {
 
         do {
             if (!contraComputadora) {
                 jugarContraJugador();
             } else {
-                jugarContraComputadora();
+                jugarContraCPU();
             }
 
             System.out.println(Idiomas.JUGAR_DE_NUEVO);
@@ -74,7 +74,7 @@ public class CLI {
 
         } while (true);
         // Mostrar el salón de la fama al finalizar el juego
-        salonDeLaFama.mostrar();
+        salonDeLaFama.imprimirSalonFama();
     }
 
     /**Este metodo es el que nos permite jugar contra otro jugador, contiene validaciones de ingreso de datos.*/
@@ -133,7 +133,7 @@ public class CLI {
                 turnoJugador(jugador2);
             }
 
-            if (verificarVictoria()) {
+            if (comprobarGanador()) {
                 System.out.println("¡" + (turnoJugador1 ? jugador1.getNombre() : jugador2.getNombre()) +
                         Idiomas.HA_GANADO);
                 break;
@@ -147,16 +147,16 @@ public class CLI {
         }
 
         // Actualizar el salón de la fama
-        if (verificarVictoria()) {
-            salonDeLaFama.actualizar(turnoJugador1 ? jugador1.getNombre() : jugador2.getNombre());
+        if (comprobarGanador()) {
+            salonDeLaFama.refrescarSalonFama(turnoJugador1 ? jugador1.getNombre() : jugador2.getNombre());
         }
 
         // Imprimir el salón de la fama al final de la partida
-        salonDeLaFama.mostrar();
+        salonDeLaFama.imprimirSalonFama();
     }
 
     /**Este metodo nos permite jugar contra la computadora*/
-    public static void jugarContraComputadora(){
+    public static void jugarContraCPU(){
         System.out.println(Idiomas.NUEVA_PARTIDA);
         System.out.print(Idiomas.NOMBRE);
         String nombreJugador1 = scanner.nextLine();
@@ -183,10 +183,10 @@ public class CLI {
             if (turnoJugador1) {
                 turnoJugador(jugador1);
             } else {
-                turnoComputadora();
+                turnoCPU();
             }
 
-            if (verificarVictoria()) {
+            if (comprobarGanador()) {
                 System.out.println("¡" + (turnoJugador1 ? jugador1.getNombre() : jugador2.getNombre()) +
                         Idiomas.HA_GANADO);
                 break;
@@ -200,8 +200,8 @@ public class CLI {
         }
 
         // Actualizar el salón de la fama
-        if (verificarVictoria()) {
-            salonDeLaFama.actualizar(jugador1.getNombre());
+        if (comprobarGanador()) {
+            salonDeLaFama.refrescarSalonFama(jugador1.getNombre());
         }
     }
 
@@ -221,7 +221,7 @@ public class CLI {
                 fila = -1; // Valor inválido para continuar el bucle
             }
             if (fila < 0 || fila > 2 || filaLlena(fila)) {
-                System.out.println(Idiomas.FILA_INVALIDA);
+                System.out.println(Idiomas.FILA_NO_VALIDA);
             }
         } while (fila < 0 || fila > 2 || filaLlena(fila));
 
@@ -237,7 +237,7 @@ public class CLI {
                 columna = -1; // Valor inválido para continuar el bucle
             }
             if (columna < 0 || columna > 2 || columnaLlena(columna)) {
-                System.out.println(Idiomas.COLUMNA_INVALIDA);
+                System.out.println(Idiomas.COLUMNA_NO_VALIDA);
             }
         } while (columna < 0 || columna > 2 || columnaLlena(columna));
 
@@ -254,14 +254,38 @@ public class CLI {
 
     /**Este metodo es el que nos permite iniciar
      *  toda la aplicacion.*/
-    public static void launchGame() {
-        mostrarMenuIdiomas();
-        String idiomaSeleccionado = scanner.nextLine().toUpperCase();
-        Idiomas.getInstance(idiomaSeleccionado);
+    public static void launchApp() {
+        boolean idiomaValido = false;
+        do {
+            try {
+                menuIdiomas();
+                String idiomaSeleccionado = scanner.nextLine().toUpperCase();
+                Idiomas idioma = Idiomas.getInstance(idiomaSeleccionado);
+                if (idioma == null) {
+                    throw new IllegalArgumentException("Idioma no válido: " + idiomaSeleccionado);
+                }
+
+                // Resto de la lógica aquí
+                contraComputadora = seleccionarModoJuego(); // Obtener el valor del modo de juego
+                Tablero juego = new Tablero(contraComputadora); // Crear una instancia de Juego con el modo de juego seleccionado
+                startGame();
+
+                idiomaValido = true; // Si llegamos aquí, el idioma es válido y podemos salir del bucle
+            } catch (IllegalArgumentException e) {
+                System.err.println("Error: " + e.getMessage());
+                System.out.println("¿Desea intentarlo de nuevo? (s/n): ");
+                String respuesta = scanner.nextLine();
+                if (!respuesta.equalsIgnoreCase("s")) {
+                    break; // Si la respuesta no es "s", salimos del bucle
+                }
+            } catch (Exception e) {
+                System.err.println(Idiomas.ERROR_INESPERADO);
+            }
+        } while (!idiomaValido);
 
         contraComputadora = seleccionarModoJuego(); // Obtener el valor del modo de juego
         Tablero juego = new Tablero(contraComputadora); // Crear una instancia de Juego con el modo de juego seleccionado
 
-        iniciarJuego();
+        startGame();
     }
 }

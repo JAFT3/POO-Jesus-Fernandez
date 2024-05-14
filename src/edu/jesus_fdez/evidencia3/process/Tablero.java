@@ -58,7 +58,7 @@ public class Tablero {
     }
 
     /**Definimos este metodo para asignarle un simbolo a la computadora y que pueda jugar.*/
-    public static void turnoComputadora() {
+    public static void turnoCPU() {
         if (juegoComputadora != null) {
             juegoComputadora.setSimbolo(jugador2.getSimbolo().charAt(0)); // Establece el símbolo de la computadora
             juegoComputadora.jugarTurno(tablero); // Llama al método jugarTurno de JuegoComputadora
@@ -69,7 +69,7 @@ public class Tablero {
     }
 
     /**ESte metodo nos permite verificar que alguien haya ganado en cualquiera de las posiciones ganadoras.*/
-    public static boolean verificarVictoria() {
+    public static boolean comprobarGanador() {
         for (int i = 0; i < 3; i++) {
             if (tablero[i][0] != '-' && tablero[i][0] == tablero[i][1] && tablero[i][0] == tablero[i][2]) {
                 return true; // Verificación horizontal

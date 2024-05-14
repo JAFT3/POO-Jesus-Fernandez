@@ -34,6 +34,6 @@ public class CPU {
         tablero[fila][columna] = simbolo;
         fila = fila + 1;
         columna = columna + 1;
-        System.out.println(Idiomas.COMPUTADORA_VICTORIA + fila + "][" + columna + "]");
+        System.out.println(Idiomas.VICTORIA_CPU + fila + "][" + columna + "]");
     }
 }
