@@ -25,29 +25,23 @@ public class Idiomas {
     public static String NOMBRE;
     public static String TURNO;
     public static String FILA;
-    public static String FILA_NO_VALIDA;
+    public static String FILA_INVALIDA;
     public static String NUMERO_INVALIDO;
     public static String COLUMNA;
-    public static String COLUMNA_NO_VALIDA;
+    public static String COLUMNA_INVALIDA;
     public static String CASILLA_OCUPADA;
     public static String ERROR_INICIALIZACION;
     public static String TABLERO;
-    public static String VICTORIA_CPU;
+    public static String COMPUTADORA_VICTORIA;
     public static String OPCION_INVALIDA;
     public static String ERROR_INESPERADO;
-    public static String INTENTAR_NUEVAMENTE;
 
-    /**
-     * Este metodo nos permite obtener la instancia del idioma que el usuario escoja para poder
-     * asignarle un texto en dicho idioma a cada variable
-     *
-     * @return
-     */
-    public static Idiomas getInstance(String idioma) {
+    /**Este metodo nos permite obtener la instancia del idioma que el usuario escoja para poder
+     * asignarle un texto en dicho idioma a cada variable*/
+    public static void getInstance(String idioma) {
         Textos opcion = Textos.valueOf(idioma);
         switch (opcion) {
             case ESP:
-                INTENTAR_NUEVAMENTE = "¿Desea intentarlo de nuevo? (s/n): ";
                 BIENVENIDA = "¡Bienvenido al juego de tres en raya!";
                 SELECCIONE_OPCION = "Seleccione el modo de juego: ";
                 PERSONAVPERSONA = "1. Jugador contra jugador";
@@ -73,21 +67,20 @@ public class Idiomas {
                 NOMBRE = "Ingrese su nombre: ";
                 TURNO = "Turno de ";
                 FILA = "Ingrese la fila (1-3): ";
-                FILA_NO_VALIDA = "Fila inválida o llena. Debe ser un número entre 1 y 3 y no debe estar llena.";
+                FILA_INVALIDA = "Fila inválida o llena. Debe ser un número entre 1 y 3 y no debe estar llena.";
                 NUMERO_INVALIDO = "Debe ingresar un número de un solo digito entre 1 y 3. Inténtelo de nuevo.";
                 COLUMNA = "Ingrese la columna (1-3): ";
-                COLUMNA_NO_VALIDA = "Columna inválida o llena. Debe ser un número entre 1 y 3 y no debe estar llena.";
+                COLUMNA_INVALIDA = "Columna inválida o llena. Debe ser un número entre 1 y 3 y no debe estar llena.";
                 CASILLA_OCUPADA = "La casilla seleccionada está ocupada. Intente de nuevo.";
                 ERROR_INICIALIZACION = "Error: falta de inicialización de variables.";
                 TABLERO = "Tablero:";
-                VICTORIA_CPU = "La computadora ha jugado en la posición [";
+                COMPUTADORA_VICTORIA = "La computadora ha jugado en la posición [";
 
                 OPCION_INVALIDA = "Opción inválida. Por favor, seleccione una opción válida.";
                 ERROR_INESPERADO = "Error inesperado ";
                 break;
 
             case ENG:
-                INTENTAR_NUEVAMENTE = "¿Try again? (s= yes/n= no): ";
                 BIENVENIDA = "Welcome to the game of tic-tac-toe!";
                 SELECCIONE_OPCION = "Select game mode: ";
                 PERSONAVPERSONA = "1. Player vs. player";
@@ -112,14 +105,14 @@ public class Idiomas {
                 NOMBRE = "Enter your name: ";
                 TURNO = "Turn of ";
                 FILA = "Enter row (1-3): ";
-                FILA_NO_VALIDA = "Invalid or full row. Must be a number between 1 and 3 and must not be full";
+                FILA_INVALIDA = "Invalid or full row. Must be a number between 1 and 3 and must not be full";
                 NUMERO_INVALIDO = "You must enter a single digit number between 1 and 3. Try again.";
                 COLUMNA = "Enter column (1-3): ";
-                COLUMNA_NO_VALIDA = "Invalid or full column. Must be a number between 1 and 3 and must not be full.";
+                COLUMNA_INVALIDA = "Invalid or full column. Must be a number between 1 and 3 and must not be full.";
                 CASILLA_OCUPADA = "The selected column is already full. Please try again.";
                 ERROR_INICIALIZACION = "Error: variable initialisation failed.";
                 TABLERO = "Board:";
-                VICTORIA_CPU = "The computer has played in position [";
+                COMPUTADORA_VICTORIA = "The computer has played in position [";
 
                 OPCION_INVALIDA = "Invalid option. Please select a valid option.";
                 ERROR_INESPERADO = "Unexpected error ";
@@ -148,24 +141,21 @@ public class Idiomas {
                 NOMBRE = "请输入你的名字：";
                 TURNO = "轮到你了。";
                 FILA = "请输入一行 (1-3)： ";
-                FILA_NO_VALIDA = "行无效或完整。 1 到 3 的数字不应是完整的。";
+                FILA_INVALIDA = "行无效或完整。 1 到 3 的数字不应是完整的。";
                 NUMERO_INVALIDO = "请输入 1 到 3 之间的一位数字。再次键入。";
                 COLUMNA = "请输入第（1-3）栏： ";
-                COLUMNA_NO_VALIDA = "列无效或已满。它应该是从一到三的数字，并且不应该是完整的。";
+                COLUMNA_INVALIDA = "列无效或已满。它应该是从一到三的数字，并且不应该是完整的。";
                 CASILLA_OCUPADA = "所选方格已填满。请再试一次。";
                 ERROR_INICIALIZACION = "错误：缺少变量初始化。";
                 TABLERO = "错误：缺少变量初始化。";
-                VICTORIA_CPU = "“计算机发挥了作用[";
+                COMPUTADORA_VICTORIA = "“计算机发挥了作用[";
 
                 OPCION_INVALIDA = "无效选项。请选择一个有效的选项。 ";
                 ERROR_INESPERADO = "意外的错误";
-                INTENTAR_NUEVAMENTE = "再试一次吗？（s= 是/n= 否";
                 break;
-
             default:
                 throw new IllegalArgumentException("Invalid language selection");
         }
-        return null;
     }
 
     private enum Textos {
